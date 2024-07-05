@@ -6,7 +6,7 @@ import Home from './Home';
 import { auth } from './Firebase';
 import {onAuthStateChanged} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
-
+import Dash1 from './Dash1';
 
 
 const App = () => {
@@ -50,13 +50,14 @@ const App = () => {
   }, [auth]);
   //.then((data) => {console.log('Auth state changed')});
   return (
-    <div className='flex flex-col min-h-screen'>
-        <Routes>
-          {/* <Route path="/" element={<Widget />} /> */}
+    <div className='w-1/2 mx-auto mt-20'>
+        {/* <Routes>
           <Route path="/" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/Home" element={<Home />} />
-        </Routes>
+        </Routes> */}
+        <Dash1 />
+
     </div>
   );
 };
