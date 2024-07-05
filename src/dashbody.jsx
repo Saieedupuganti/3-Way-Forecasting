@@ -26,7 +26,7 @@ export function Dashbody() {
           case 'contact':
             return <Contact />;
           default:
-            return <h1>Hello</h1>;
+            return <Dashbody1/>;
         }
       };
 

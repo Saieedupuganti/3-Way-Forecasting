@@ -24,7 +24,7 @@ export function Sidebar() {
     <Card className="min-w-52 shadow-lg bg-gray-200 ">
       <List className="p-0 mx-auto min-w-full block mt-3">
         <Link to={'/home/high'}>
-            <ListItem selected={page == '/home/high'} style={{background:color1}} className="block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
+            <ListItem selected={page == '/home/high' || page == '/home'} style={{background:color1}} className="block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
                 HighCharts
             </ListItem>
         </Link>
@@ -33,11 +33,11 @@ export function Sidebar() {
                 Zoho
             </ListItem>
         </Link>
-        <Link to={'/home/settings'}>
+        {/* <Link to={'/home/settings'}>
             <ListItem selected={page == '/home/settings'} style={{background:color3}} className="block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
                 Settings
             </ListItem>
-        </Link>
+        </Link> */}
       </List>
     </Card>
   );
