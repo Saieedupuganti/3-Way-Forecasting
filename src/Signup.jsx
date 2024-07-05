@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth';
 import { auth } from './Firebase'; // Adjust path as per your file structure
 import { Link } from 'react-router-dom';
 
@@ -10,6 +10,8 @@ const SignUp = () => {
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
 
+
+  const googleProvider = new GoogleAuthProvider();
   const handleSignUp = async (e) => {
     e.preventDefault();
 
@@ -57,8 +59,19 @@ const SignUp = () => {
     }
   };
 
+  const handleGoogleLogin = () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-zinc-100 dark:bg-zinc-900">
+    <div className="flex items-center justify-center min-h-full flex-grow bg-zinc-100 dark:bg-zinc-900">
       <div className="bg-white dark:bg-zinc-800 p-8 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold text-center text-zinc-800 dark:text-zinc-100 mt-4 mb-6">Sign Up</h2>
         <form onSubmit={handleSignUp}>
@@ -105,8 +118,11 @@ const SignUp = () => {
             />
             <label htmlFor="showPasswordCheckbox" className="text-zinc-800 dark:text-zinc-100">Show Password</label>
           </div>
-          <div className="mb-4">
+          <div className="mb-4 flex gap-6">
             <button type="submit" className="w-full bg-blue-800 text-white py-2 rounded-lg hover:bg-blue-700">Sign Up</button>
+            <button className="w-full block bg-blue-600 text-white rounded-lg" onClick={handleGoogleLogin}>
+              Google
+            </button>
           </div>
         </form>
         {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
