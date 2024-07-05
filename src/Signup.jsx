@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from 'firebase/auth';
 import { auth } from './Firebase'; // Adjust path as per your file structure
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -70,9 +71,35 @@ const SignUp = () => {
       });
   };
 
+  const navigate = useNavigate();
+  function Verified(){
+    navigate('/home');
+  }
+
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setToken(user.accessToken);
+        console.log('User signed in:', user);
+        Verified();
+      } else {
+        console.log('No user signed in');
+      }
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, [auth]);
+
   return (
-    <div className="flex items-center justify-center min-h-full flex-grow bg-zinc-100 dark:bg-zinc-900">
-      <div className="bg-white dark:bg-zinc-800 p-8 rounded-lg shadow-lg w-full max-w-md">
+    <div className="flex justify-center h-screen flex-col bg-zinc-100 dark:bg-zinc-900">
+    <h1 className='w-full text-center py-2 text-4xl bg-gray-800 text-white'>
+        <img src="logo1.png" alt="C Suite Navigator Image" className="w-20 mx-auto py-0 inline-block" />
+        C Suite Navigator
+    </h1>
+    <div className="flex justify-center flex-grow bg-zinc-100 dark:bg-zinc-900">
+      <div className="bg-white dark:bg-zinc-800 p-8 flex-grow justify-center rounded-lg shadow-2xl w-full max-w-md mt-20 h-fit mx-5">
         <h2 className="text-2xl font-bold text-center text-zinc-800 dark:text-zinc-100 mt-4 mb-6">Sign Up</h2>
         <form onSubmit={handleSignUp}>
           <div className="mb-4">
@@ -129,7 +156,8 @@ const SignUp = () => {
         <p className="text-center text-zinc-600 dark:text-zinc-400">Already have an account? <Link to="/login" className="text-primary hover:underline">Sign in</Link></p>
       </div>
     </div>
-  );
+    </div>
+  )
 };
 
 export default SignUp;

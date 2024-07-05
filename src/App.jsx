@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SignUp from './Signup';
 import Login from './Login';
+import Home from './Home';
 import { auth } from './Firebase';
 import {onAuthStateChanged} from 'firebase/auth'
-// import './styles.css';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const App = () => {
   const [token, setToken] = useState('');
@@ -25,12 +28,18 @@ const App = () => {
     return data;
 }
 
+  const navigate = useNavigate();
+  function Verified(){
+    navigate('/home');
+  }
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setToken(user.accessToken);
         console.log('User signed in:', user);
+        Verified();
       } else {
         console.log('No user signed in');
       }
@@ -42,14 +51,12 @@ const App = () => {
   //.then((data) => {console.log('Auth state changed')});
   return (
     <div className='flex flex-col min-h-screen'>
-      <h1 className='w-full text-center py-4 text-4xl'>C Suite Navigator</h1>
-      <Router>
         <Routes>
           {/* <Route path="/" element={<Widget />} /> */}
           <Route path="/" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/Home" element={<Home />} />
         </Routes>
-      </Router>
     </div>
   );
 };
