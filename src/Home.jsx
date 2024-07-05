@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { auth } from './Firebase';
 import { useNavigate } from 'react-router-dom';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
@@ -12,7 +12,8 @@ import {
   Card,
 } from "@material-tailwind/react";
 import { Bars3CenterLeftIcon } from "@heroicons/react/24/solid";
-
+import { Sidebar } from './sidebar';
+import { Dashbody } from './dashbody';
 
 
 
@@ -75,7 +76,7 @@ export default function Home() {
       <Navbar className="sticky top-0 h-max max-w-full rounded-none shadow-lg px-4 py-2 lg:px-8 lg:py-2 bg-gray-900">
         <div className="flex items-center justify-between text-blue-gray-900">
             <Bars3CenterLeftIcon class="h-6 w-6 text-white mr-4 inline-block lg:hidden" />
-            <img src="logo1.png" alt="C Suite Navigator Image" className="mr-auto w-14 py-0 inline-block" />
+            <img src="/logo1.png" alt="C Suite Navigator Image" className="mr-auto w-14 py-0 inline-block" />
             <h2 className='w-full mx-auto text-center text-2xl'>C Suite Navigator</h2>
             <div className="flex items-center gap-4">
                 <div className="flex items-center gap-x-1">
@@ -98,8 +99,9 @@ export default function Home() {
           </div>
         </MobileNav>
       </Navbar>
-      <div id="mainbody" className="flex-grow mainbody min-w-screen flex flex-row">
-        
+      <div id="mainbody" className="flex-grow mainbody flex flex-row" style={{width:"100%",overflow:"hidden"}}>
+        <Sidebar/>
+        <Dashbody />
       </div>
     </div>
   );

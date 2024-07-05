@@ -80,7 +80,7 @@ const SignUp = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setToken(user.accessToken);
+        // setToken(user.accessToken);
         console.log('User signed in:', user);
         Verified();
       } else {

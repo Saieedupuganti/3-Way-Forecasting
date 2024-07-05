@@ -1,15 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { createContext, useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import SignUp from './Signup';
 import Login from './Login';
 import Home from './Home';
 import { auth } from './Firebase';
 import {onAuthStateChanged} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
-import Dash1 from './Dash1';
+import Dash1 from './Dash1'
 
+export const AuthContext = createContext();
 
 const App = () => {
+  const location = useLocation();  // Use useLocation to get the current URL
+
+  useEffect(() => {
+    setPage(location.pathname);  // Update the page state whenever the URL changes
+    setPageName(location.pathname.split('/').slice(-1)[0]); // Update the page state whenever the URL changes
+  }, [location]);
+
+  const [page,setPage] = useState('/home');
+  const [pagename,setPageName] = useState('highchart');
+  const [val1,setVal1] = useState('1');
   const [token, setToken] = useState('');
   window.fetch2 = async (url,methods) => {
     console.log(methods);
@@ -30,7 +41,9 @@ const App = () => {
 
   const navigate = useNavigate();
   function Verified(){
-    navigate('/home');
+    console.log(page)
+    if(page=="/" || page=="/login")
+      navigate('/home');
   }
 
 
@@ -50,15 +63,15 @@ const App = () => {
   }, [auth]);
   //.then((data) => {console.log('Auth state changed')});
   return (
-    <div className='w-1/2 mx-auto mt-20'>
-        {/* <Routes>
-          <Route path="/" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/Home" element={<Home />} />
-        </Routes> */}
-        <Dash1 />
-
-    </div>
+    <AuthContext.Provider value={{ page, setPage, val1, pagename,setPageName }} >
+      <div className='flex flex-col min-h-screen'>
+          <Routes>
+            <Route path="/" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/Home/*" element={<Home />} />
+          </Routes>
+      </div>
+    </AuthContext.Provider>
   );
 };
 
