@@ -4,6 +4,8 @@ import { List, ListItem, Card } from "@material-tailwind/react";
 import { useNavigate,useLocation, Link  } from "react-router-dom";
 import {AuthContext} from './App'
 import Dash1 from "./Dash1";
+import Dash2 from "./Dash2";
+import Dash3 from "./Dash3";
 
 
 export function Dashbody() {
@@ -29,7 +31,7 @@ export function Dashbody() {
       };
 
     return(
-        <div className="flex w-full">
+        <div className="flex w-full bg-gray-100">
             {renderView()}
         </div>
     )
@@ -38,13 +40,21 @@ export function Dashbody() {
 
 const Dashbody1 = ()=>{
     return(
-        <div className="w-full">
-            <div className="w-full h-80 flex flex-row">
+        <div className="w-full mt-6" style={{transform:"scale(0.93)"}}>
+            <div className="w-[100%] mx-2 h-80 flex flex-row gap-10 mb-10">
                 <span className="h-80 flex highcontainer bg-gray-200" style={{border:"0px solid black"}}>
                     <Dash1/>
                 </span>
                 <span className="h-80 flex highcontainer">
-                    <Dash1/>
+                    <Dash2/>
+                </span>
+            </div>
+            <div className="w-[100%] h-80 flex flex-row  gap-10">
+                <span className="h-80 flex highcontainer bg-gray-200" style={{border:"0px solid black"}}>
+                    <Dash2/>
+                </span>
+                <span className="h-80 flex highcontainer">
+                    <Dash3/>
                 </span>
             </div>
         </div>

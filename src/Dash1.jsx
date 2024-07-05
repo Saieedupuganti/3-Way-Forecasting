@@ -13,14 +13,10 @@ const Dash1 = ()=>{
             options={{
 
                 title: {
-                    text: 'U.S Solar Employment Growth',
+                    text: 'Expenses Overview',
                     align: 'left'
                 },
             
-                subtitle: {
-                    text: 'By Job Category. Source: <a href="https://irecusa.org/programs/solar-jobs-census/" target="_blank">IREC</a>.',
-                    align: 'left'
-                },
             
                 yAxis: {
                     title: {
