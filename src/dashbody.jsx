@@ -6,6 +6,13 @@ import {AuthContext} from './App'
 import Dash1 from "./Dash1";
 import Dash2 from "./Dash2";
 import Dash3 from "./Dash3";
+import Dash4 from "./Dash4";
+import Dash5 from "./Dash5";
+import Dash6 from "./Dash6";
+import Dash7 from "./Dash7";
+import Dash8 from "./Dash8";
+import Dash9 from "./Dash9";
+import Dash10 from "./Dash10";
 
 
 export function Dashbody() {
@@ -49,14 +56,40 @@ const Dashbody1 = ()=>{
                     <Dash2/>
                 </span>
             </div>
-            <div className="w-[100%] h-80 flex flex-row  gap-10">
+            <div className="w-[100%] h-80 flex flex-row  gap-10 mb-10">
                 <span className="h-80 flex highcontainer bg-gray-200" style={{border:"0px solid black"}}>
-                    <Dash2/>
+                    <Dash3/>
                 </span>
                 <span className="h-80 flex highcontainer">
-                    <Dash3/>
+                    <Dash4/>
+                </span>
+            </div>
+            <div className="w-[100%] h-80 flex flex-row  gap-10 mb-10">
+                <span className="h-80 flex highcontainer bg-gray-200" style={{border:"0px solid black"}}>
+                    <Dash5/>
+                </span>
+                <span className="h-80 flex highcontainer">
+                    <Dash6/>
+                </span>
+            </div>
+            <div className="w-[100%] h-80 flex flex-row  gap-10 mb-10">
+                <span className="h-80 flex highcontainer bg-gray-200" style={{border:"0px solid black"}}>
+                    <Dash7/>
+                </span>
+                <span className="h-80 flex highcontainer">
+                    <Dash8/>
+                </span>
+            </div>
+            <div className="w-[100%] h-80 flex flex-row  gap-10 mb-10">
+                <span className="h-80 flex highcontainer bg-gray-200" style={{border:"0px solid black"}}>
+                    <Dash9/>
+                </span>
+                <span className="h-80 flex highcontainer">
+                    <Dash10/>
                 </span>
             </div>
         </div>
     )
 }
+
+
