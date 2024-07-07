@@ -14,13 +14,55 @@ import {
 import { Bars3CenterLeftIcon } from "@heroicons/react/24/solid";
 import { Sidebar } from './sidebar';
 import { Dashbody } from './dashbody';
+import { XMarkIcon } from "@heroicons/react/24/solid";
+
+
 
 
 
 export default function Home() {
   const [openNav, setOpenNav] = React.useState(false);
   const [openBar, setOpenBar] = React.useState(false);
- 
+  
+  
+  const [dimensions, setDimensions] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
+  const setMenustateoff = ()=>{
+    return;
+  }
+
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setDimensions({
+  //       width: window.innerWidth,
+  //       height: window.innerHeight
+  //     });
+  //   };
+    
+  //   window.addEventListener('resize', handleResize);
+    
+  //   // Cleanup event listener on component unmount
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }, []);
+  const [menustate,setMenustate] = useState(true);
+  useEffect(()=>{
+    if(window.innerWidth>window.innerHeight){
+      setMenustate(false);
+    }else{
+      setMenustate(true);
+    }
+  },[])
+  // console.log(window.innerWidth);
+  // if(window.innerWidth>window.innerHeight){
+  //   const [menustate,setMenustate] = useState(false);
+  // }else{
+  //   const [menustate,setMenustate] = useState(true);
+  // }
+
   React.useEffect(() => {
     window.addEventListener(
       "resize",
@@ -75,9 +117,11 @@ export default function Home() {
     <div className="min-h-screen flex flex-col w-[100%] overflow-scroll">
       <Navbar className="sticky top-0 h-max max-w-full rounded-none shadow-lg px-4 py-2 lg:px-8 lg:py-2 bg-gray-900">
         <div className="flex items-center justify-between text-blue-gray-900">
-            <Bars3CenterLeftIcon class="h-6 w-6 text-white mr-4 inline-block lg:hidden" />
-            <img src="/logo1.png" alt="C Suite Navigator Image" className="mr-auto w-14 py-0 inline-block" />
-            <h2 className='w-full mx-auto text-center text-2xl'>C Suite Navigator</h2>
+            {menustate?
+            <Bars3CenterLeftIcon class="h-10 w-10 text-white mr-4 inline-block " onClick={()=>{setMenustate(false)}} />:
+            <XMarkIcon class="h-10 w-10 text-white mr-4 inline-block"  onClick={()=>{setMenustate(true)}} />}
+            <img src="/logo3.jpg" alt="C Suite Navigator Image" className="mr-auto w-14 py-0 inline-block" />
+            <h2 className='w-full mx-auto text-center text-2xl'>CFO Dashboard</h2>
             <div className="flex items-center gap-4">
                 <div className="flex items-center gap-x-1">
                 <Button
@@ -99,8 +143,10 @@ export default function Home() {
           </div>
         </MobileNav>
       </Navbar>
-      <div id="mainbody" className="flex-grow mainbody flex flex-row" style={{width:"100%",overflow:"hidden"}}>
-        <Sidebar/>
+      <div id="mainbody" className="mainbody flex flex-grow flex-row" style={{width:"100vw"}}>
+    {/* console.log(menustate);
+    console.log(menustate); */}
+        <Sidebar menustate={menustate} setMenustate={setMenustate}/>
         <Dashbody />
       </div>
     </div>

@@ -73,7 +73,7 @@ const SignUp = () => {
 
   const navigate = useNavigate();
   function Verified(){
-    navigate('/home');
+    navigate('/home/high1');
   }
 
 
@@ -95,8 +95,8 @@ const SignUp = () => {
   return (
     <div className="flex justify-center h-screen flex-col bg-zinc-100 dark:bg-zinc-900">
     <h1 className='w-full text-center py-2 text-4xl bg-gray-800 text-white'>
-        <img src="logo1.png" alt="C Suite Navigator Image" className="w-20 mx-auto py-0 inline-block" />
-        C Suite Navigator
+        <img src="logo3.jpg" alt="C Suite Navigator Image" className="w-20 mx-auto py-0 inline-block" />
+        {/* C Suite Navigator */}
     </h1>
     <div className="flex justify-center flex-grow bg-zinc-100 dark:bg-zinc-900">
       <div className="bg-white dark:bg-zinc-800 p-8 flex-grow justify-center rounded-lg shadow-2xl w-full max-w-md mt-20 h-fit mx-5">
@@ -146,10 +146,26 @@ const SignUp = () => {
             <label htmlFor="showPasswordCheckbox" className="text-zinc-800 dark:text-zinc-100">Show Password</label>
           </div>
           <div className="mb-4 flex gap-6">
-            <button type="submit" className="w-full bg-blue-800 text-white py-2 rounded-lg hover:bg-blue-700">Sign Up</button>
-            <button className="w-full block bg-blue-600 text-white rounded-lg" onClick={handleGoogleLogin}>
-              Google
+            <button
+              onClick={handleGoogleLogin}
+              className='w-full j text-black rounded-lg flex-row flex bg-white text-black h-12 shadow-lg '
+              style={{boxShadow:"0px 0px 20px 0px rgb(0,0,100,0.3)",alignItems:"center"}}
+            >
+              <img
+                src="https://developers.google.com/identity/images/g-logo.png"
+                alt="Google Logo"
+                className='mx-3 ml-4'
+                class='mx-3 ml-4'
+                style={{ marginRight: '10px', height: "30px" }}
+              />
+              <span style={{ fontSize: '16px',flexGrow:"1", borderLeft:"1px solid black" }} className='block align-center ' >Google</span>
             </button>
+            <button type="submit" style={{boxShadow:"0px 0px 20px 0px rgb(0,0,0,0.4)"}} className="w-full bg-blue-800 text-white py-1 rounded-lg hover:bg-blue-700 h-12">
+              Sign Up
+            </button>
+            {/* <button className="w-full block bg-blue-600 text-white rounded-lg">
+              Google
+            </button> */}
           </div>
         </form>
         {error && <p className="text-red-600 text-sm mt-2">{error}</p>}

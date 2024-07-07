@@ -88,7 +88,7 @@ const Login = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setToken(user.accessToken);
+        // setToken(user.accessToken);
         console.log('User signed in:', user);
         Verified();
       } else {
@@ -104,8 +104,8 @@ const Login = () => {
   return (
     <div className="flex justify-center h-screen flex-col bg-zinc-100 dark:bg-zinc-900">
       <h1 className='w-full text-center py-2 text-4xl bg-gray-800 text-white'>
-        <img src="logo1.png" alt="C Suite Navigator Image" className="w-20 mx-auto py-0 inline-block" />
-        C Suite Navigator
+        <img src="logo3.jpg" alt="C Suite Navigator Image" className="w-20 mx-auto py-0 inline-block" />
+        {/* C Suite Navigator */}
       </h1>
     <div className="flex justify-center flex-grow bg-zinc-100 dark:bg-zinc-900">
       <div className="bg-white dark:bg-zinc-800 p-8 flex-grow justify-center rounded-lg shadow-lg w-full max-w-md mt-20 h-fit mx-5">
