@@ -1,41 +1,38 @@
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import Exporting from 'highcharts/modules/exporting';
+import FullScreen from 'highcharts/modules/full-screen';
+import ExportData from 'highcharts/modules/export-data';
 
+// Initialize the modules
+Exporting(Highcharts);
+FullScreen(Highcharts);
+ExportData(Highcharts);
 
-
-const Dash1 = ()=>{
-
-    
-
+const Dash1 = () => {
     return (
         <HighchartsReact
             highcharts={Highcharts}
             options={{
-
                 title: {
                     text: 'Expenses Overview',
                     align: 'left'
                 },
-            
-            
                 yAxis: {
                     title: {
                         text: 'Number of Employees'
                     }
                 },
-            
                 xAxis: {
                     accessibility: {
                         rangeDescription: 'Range: 2010 to 2020'
                     }
                 },
-            
                 legend: {
                     layout: 'vertical',
                     align: 'right',
                     verticalAlign: 'middle'
                 },
-            
                 plotOptions: {
                     series: {
                         label: {
@@ -44,7 +41,6 @@ const Dash1 = ()=>{
                         pointStart: 2010
                     }
                 },
-            
                 series: [{
                     name: 'Installation & Developers',
                     data: [
@@ -76,7 +72,6 @@ const Dash1 = ()=>{
                         17300, 13053, 11906, 10073
                     ]
                 }],
-            
                 responsive: {
                     rules: [{
                         condition: {
@@ -90,14 +85,27 @@ const Dash1 = ()=>{
                             }
                         }
                     }]
+                },
+                exporting: {
+                    buttons: {
+                        contextButton: {
+                            menuItems: [
+                                'viewFullscreen',
+                                'printChart',
+                                'downloadPNG',
+                                'downloadJPEG',
+                                'downloadPDF',
+                                'downloadSVG',
+                                'downloadCSV',
+                                'downloadXLS',
+                                'viewData'
+                            ]
+                        }
+                    }
                 }
-            
             }}
         />
-    )
-}
-
-
-
+    );
+};
 
 export default Dash1;

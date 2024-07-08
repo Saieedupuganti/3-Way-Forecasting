@@ -9,6 +9,6 @@ export default defineConfig({
     port:5173
   },
   build: {
-    outDir: '../vercel/api/files',
+    outDir: './vercel/api/files',
   },
 })
