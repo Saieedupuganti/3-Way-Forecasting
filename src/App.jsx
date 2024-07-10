@@ -23,7 +23,7 @@ const App = () => {
   const [val1,setVal1] = useState('1');
   const [token, setToken] = useState('');
   window.fetch2 = async (url,methods) => {
-    console.log(methods);
+    // console.log(methods);
     if(typeof(methods.headers)==typeof({})){
         methods.headers = {
             'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ const App = () => {
 
   const navigate = useNavigate();
   function Verified(){
-    console.log(page)
+    // console.log(page)
     if(page=="/" || page=="/login")
       navigate('/home');
   }

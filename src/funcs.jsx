@@ -1,6 +1,6 @@
 
 export const fetch2 = async (url,methods) => {
-    console.log(methods);
+    // console.log(methods);
     if(typeof(methods.headers)==typeof({})){
         methods.headers = {
             'Content-Type': 'application/json',

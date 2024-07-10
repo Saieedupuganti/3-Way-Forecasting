@@ -15,19 +15,19 @@ import Dash8 from "./Dash8";
 import Dash9 from "./Dash9";
 import Dash10 from "./Dash10";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-
-
+import { FileUploadButton }  from "./importdata";
+import ChartOfAccounts from "./Chartofaccounts";
 
 export function Dashbody() {
     
     const { page, setPage, val1, pagename,setPageName } = useContext(AuthContext);
-    console.log(page);
+    // console.log(page);
     const [selected, setSelected] = useState(1);
     const setSelectedItem = (value) => setSelected(value);
     const navigate = useNavigate();
 
     const renderView = () => {
-        console.log(page);
+        // console.log(page);
             switch (page) {
                 case '/home/zoho1':
                     return <Zoho1 />;
@@ -39,6 +39,10 @@ export function Dashbody() {
                     return <Zoho4 />;
                 case '/home/zoho5':
                     return <Zoho5 />;
+                case '/home/importdata':
+                    return <FileUploadButton />;
+                case '/home/chartofaccounts':
+                    return <ChartOfAccounts />;
                 case '/home/high1':
                     return <Dashbody1/>;
                 case '/home/high2':
