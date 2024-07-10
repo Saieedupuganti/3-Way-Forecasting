@@ -5,7 +5,6 @@ import './ChartOfAccounts.css';
 
 const ChartOfAccounts = () => {
   const [accounts, setAccounts] = useState([]);
-  const [editIndex, setEditIndex] = useState(null); // Track which index is being edited
   const months = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
 
   useEffect(() => {
@@ -50,28 +49,55 @@ const ChartOfAccounts = () => {
     fetchAccounts();
   }, []);
 
-  const handleEdit = (index) => {
-    setEditIndex(index); // Set the index of the item being edited
+  const handleFieldEdit = (index, field, value) => {
+    const updatedAccounts = [...accounts];
+    updatedAccounts[index][field] = value;
+    setAccounts(updatedAccounts);
+    updateFirestoreDocument(updatedAccounts[index]); // Call function to update Firestore document here
   };
 
-  const handleSave = async (index) => {
+  const handleMonthEdit = (index, month, value) => {
+    const updatedAccounts = [...accounts];
+    updatedAccounts[index][month.toLowerCase()] = value;
+    setAccounts(updatedAccounts);
+    updateFirestoreDocument(updatedAccounts[index]); // Call function to update Firestore document here
+  };
+
+  const updateFirestoreDocument = async (updatedAccount) => {
     try {
-      const accountToUpdate = accounts[index];
       const accountDocRef = doc(db, 'csvData', 'your_document_id_here'); // Replace with your actual document ID
       await updateDoc(accountDocRef, {
-        'data': {
-          ...accountToUpdate,
-          // Update specific fields here if needed
-        }
+        'data': updatedAccount
       });
-      setEditIndex(null); // Reset edit state after saving
     } catch (error) {
       console.error('Error updating document:', error);
     }
   };
 
   const downloadCSV = () => {
-    // Same as your existing downloadCSV function
+    const headers = ['Account Number', 'Account Name', 'Total', ...months];
+    const rows = accounts.map(account => [
+      account.number,
+      account.name,
+      account.total,
+      ...months.map(month => account[month.toLowerCase()])
+    ]);
+
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'chart_of_accounts.csv');
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -88,7 +114,6 @@ const ChartOfAccounts = () => {
               {months.map(month => (
                 <th key={month}>{month}</th>
               ))}
-              <th>Edit</th> {/* Add edit column header */}
             </tr>
           </thead>
           <tbody>
@@ -97,36 +122,25 @@ const ChartOfAccounts = () => {
                 <tr className="group">
                   <td>{account.number}</td>
                   <td>
-                    {editIndex === index ? (
-                      <input
-                        type="text"
-                        value={account.name}
-                        onChange={(e) => {
-                          const newName = e.target.value;
-                          setAccounts(prevAccounts => {
-                            const updatedAccounts = [...prevAccounts];
-                            updatedAccounts[index] = { ...updatedAccounts[index], name: newName };
-                            return updatedAccounts;
-                          });
-                        }}
-                      />
-                    ) : (
-                      account.name
-                    )}
+                    <EditableField
+                      value={account.name}
+                      onChange={(value) => handleFieldEdit(index, 'name', value)}
+                    />
                   </td>
-                  <td>{account.total}</td>
+                  <td>
+                    <EditableField
+                      value={account.total}
+                      onChange={(value) => handleFieldEdit(index, 'total', parseFloat(value))}
+                    />
+                  </td>
                   {months.map((month, monthIndex) => (
                     <td key={monthIndex}>
-                      {account[month.toLowerCase()]}
+                      <EditableField
+                        value={account[month.toLowerCase()]}
+                        onChange={(value) => handleMonthEdit(index, month, parseFloat(value))}
+                      />
                     </td>
                   ))}
-                  <td>
-                    {editIndex === index ? (
-                      <button onClick={() => handleSave(index)}>Save</button>
-                    ) : (
-                      <button onClick={() => handleEdit(index)}>Edit</button>
-                    )}
-                  </td>
                 </tr>
                 {account.children && account.children.map(child => (
                   <tr key={child.number} className="account">
@@ -138,6 +152,38 @@ const ChartOfAccounts = () => {
           </tbody>
         </table>
       </div>
+    </div>
+  );
+};
+
+// Component for inline editable fields
+const EditableField = ({ value, onChange }) => {
+  const [editing, setEditing] = useState(false);
+  const [inputValue, setInputValue] = useState(value);
+
+  const handleDoubleClick = () => {
+    setEditing(true);
+    setInputValue(value);
+  };
+
+  const handleBlur = () => {
+    setEditing(false);
+    onChange(inputValue);
+  };
+
+  return (
+    <div onClick={handleDoubleClick}>
+      {editing ? (
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onBlur={handleBlur}
+          autoFocus
+        />
+      ) : (
+        <span>{value}</span>
+      )}
     </div>
   );
 };
