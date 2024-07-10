@@ -28,6 +28,7 @@ const ChartOfAccounts = () => {
           const monthlyValues = months.map(month => account[month] || 0);
           const total = monthlyValues.reduce((sum, value) => sum + Number(value), 0);
           return {
+            id: latestDoc.id, // Assuming you have a unique identifier for each document
             number: account['Account Number'],
             name: account['Account Name'],
             total: total,
@@ -51,28 +52,74 @@ const ChartOfAccounts = () => {
 
   const handleFieldEdit = (index, field, value) => {
     const updatedAccounts = [...accounts];
-    updatedAccounts[index][field] = value;
-    setAccounts(updatedAccounts);
-    updateFirestoreDocument(updatedAccounts[index]); // Call function to update Firestore document here
-  };
-
-  const handleMonthEdit = (index, month, value) => {
-    const updatedAccounts = [...accounts];
-    updatedAccounts[index][month.toLowerCase()] = value;
-    setAccounts(updatedAccounts);
-    updateFirestoreDocument(updatedAccounts[index]); // Call function to update Firestore document here
-  };
-
-  const updateFirestoreDocument = async (updatedAccount) => {
-    try {
-      const accountDocRef = doc(db, 'csvData', 'your_document_id_here'); // Replace with your actual document ID
-      await updateDoc(accountDocRef, {
-        'data': updatedAccount
+    const oldValue = updatedAccounts[index][field];
+    const difference = parseFloat(value) - parseFloat(oldValue);
+  
+    // Update total for the account
+    updatedAccounts[index][field] = parseFloat(value);
+  
+    // Distribute the difference evenly across all months
+    if (difference !== 0 && months.length > 0) {
+      const differencePerMonth = difference / months.length;
+      months.forEach(month => {
+        updatedAccounts[index][month.toLowerCase()] =
+          parseFloat(updatedAccounts[index][month.toLowerCase()]) + differencePerMonth;
       });
+    }
+  
+    setAccounts(updatedAccounts);
+    console.log(`Updating field '${field}' to '${value}' for document ID: ${updatedAccounts[index].id}`);
+    updateFirestoreDocument(updatedAccounts[index].id, { [field]: parseFloat(value) });
+  };
+  
+
+  const handleMonthEdit = async (index, month, value) => {
+    try {
+      const updatedAccounts = [...accounts];
+      updatedAccounts[index][month.toLowerCase()] = value;
+      
+      // Recalculate total after updating monthly value
+      const monthlyValues = months.map(m => updatedAccounts[index][m.toLowerCase()] || 0);
+      const total = monthlyValues.reduce((sum, val) => sum + Number(val), 0);
+      updatedAccounts[index]['total'] = total;
+  
+      setAccounts(updatedAccounts);
+  
+      // Prepare updated fields for Firestore update
+      const updatedFields = {
+        [month.toLowerCase()]: value,
+        total: total
+      };
+  
+      await updateFirestoreDocument(updatedAccounts[index].id, updatedFields);
+    } catch (error) {
+      console.error('Error handling month edit:', error);
+    }
+  };
+  
+  
+
+  const updateFirestoreDocument = async (documentId, updatedFields) => {
+    try {
+      const accountDocRef = doc(db, 'csvData', documentId);
+      await updateDoc(accountDocRef, {
+        data: accounts.map(account => ({
+          'Account Name': account.name,
+          'Account Number': account.number,
+          'total': account.total,
+          ...months.reduce((acc, month) => {
+            acc[month] = account[month.toLowerCase()];
+            return acc;
+          }, {})
+        }))
+      });
+      console.log('Document updated successfully.');
     } catch (error) {
       console.error('Error updating document:', error);
     }
   };
+  
+  
 
   const downloadCSV = () => {
     const headers = ['Account Number', 'Account Name', 'Total', ...months];
