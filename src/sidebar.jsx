@@ -28,9 +28,9 @@ export function Sidebar({ menustate, setMenustate }) {
   return (
     <Card className="shadow-lg bg-gray-200 overflow-hidden" style={{ minWidth: "0px", maxWidth: "0px", transition: "width ease 0.5s" }} ref={sidebarRef}>
       <List className="p-0 mx-auto min-w-full block mt-3">
-        <Link to={'/home/importdata'} onClick={handleLinkClick}>
-          <ListItem selected={isSelected('/home/importdata')} className="block text-center text-black mx-auto max-w-48 my-2" style={{ background: isSelected('/home/importdata') ? 'white' : 'rgba(75, 85, 99, 0.4)' }}>
-            Import Data
+        <Link to={'/home/importandexport'} onClick={handleLinkClick}>
+          <ListItem selected={isSelected('/home/importandexport')} className="block text-center text-black mx-auto max-w-48 my-2" style={{ background: isSelected('/home/importandexport') ? 'white' : 'rgba(75, 85, 99, 0.4)' }}>
+            Import/Export
           </ListItem>
         </Link>
         <Link to={'/home/chartofaccounts'} onClick={handleLinkClick}>
@@ -71,6 +71,11 @@ export function Sidebar({ menustate, setMenustate }) {
         <Link to={'/home/zoho5'} onClick={handleLinkClick}>
           <ListItem selected={isSelected('/home/zoho5')} className="block text-center text-black mx-auto max-w-48 my-2" style={{ background: isSelected('/home/zoho5') ? 'white' : 'rgba(75, 85, 99, 0.4)' }}>
             Vendor Insights
+          </ListItem>
+        </Link>
+        <Link to={'/home/settings'} onClick={handleLinkClick}>
+          <ListItem selected={isSelected('/home/settings')} className="block text-center text-black mx-auto max-w-48 my-2" style={{ background: isSelected('/home/settings') ? 'white' : 'rgba(75, 85, 99, 0.4)' }}>
+            Settings
           </ListItem>
         </Link>
       </List>

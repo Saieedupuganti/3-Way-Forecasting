@@ -4,10 +4,10 @@ import { auth } from './Firebase'; // Assuming you have Firebase auth and config
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userEmail, setUserEmail] = useState(''); // State to store logged-in user's email
   const [error, setError] = useState(null); // Use null instead of an empty string for error state
   const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
   const googleProvider = new GoogleAuthProvider();
@@ -84,12 +84,11 @@ const Login = () => {
     navigate('/home');
   }
 
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // setToken(user.accessToken);
         console.log('User signed in:', user);
+        setUserEmail(user.email); // Set the user's email in state
         Verified();
       } else {
         console.log('No user signed in');
@@ -100,69 +99,69 @@ const Login = () => {
     return () => unsubscribe();
   }, [auth]);
 
-
   return (
     <div className="flex justify-center h-screen flex-col bg-zinc-100 dark:bg-zinc-900">
       <h1 className='w-full text-center py-2 text-4xl bg-gray-800 text-white'>
         <img src="logo3.jpg" alt="C Suite Navigator Image" className="w-20 mx-auto py-0 inline-block" />
         {/* C Suite Navigator */}
       </h1>
-    <div className="flex justify-center flex-grow bg-zinc-100 dark:bg-zinc-900">
-      <div className="bg-white dark:bg-zinc-800 p-8 flex-grow justify-center rounded-lg shadow-lg w-full max-w-md mt-20 h-fit mx-5">
-        <h2 className="text-2xl font-bold text-center text-zinc-800 dark:text-zinc-100 mt-4 mb-6">Sign in</h2>
-        <form onSubmit={handleLogin}>
-          <div className="mb-4">
-            <input
-              type="email"
-              placeholder="Enter your Email"
-              value={email}
-              onChange={(e) => { setEmail(e.target.value); handleEmailChange(); }}
-              required
-              className="w-full px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
-          </div>
-          <div className="mb-4 relative">
-            <input
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Enter your Password"
-              value={password}
-              onChange={(e) => { setPassword(e.target.value); handlePasswordChange(); }}
-              required
-              className="w-full px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            />
-          </div>
-          <div className="mb-4 flex items-center">
-            <input
-              type="checkbox"
-              id="showPasswordCheckbox"
-              checked={showPassword}
-              onChange={() => setShowPassword(!showPassword)}
-              className="mr-2"
-            />
-            <label htmlFor="showPasswordCheckbox" className="text-zinc-800 dark:text-zinc-100">Show Password</label>
-          </div>
-          <div className="mb-4 flex gap-6">
-            <button type="submit" className="w-full bg-blue-800 text-white py-1 rounded-lg hover:bg-blue-700">
-              Sign in
-            </button>
-            <button className="w-full block bg-blue-600 text-white rounded-lg" onClick={handleGoogleLogin}>
-              Google
-            </button>
-          </div>
-        </form>
-        {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
-        <p className="text-center text-zinc-600 dark:text-zinc-400">
-          Don't have an account? <Link to="/" className="text-primary hover:underline">Sign up</Link>
-        </p>
-        <p className="text-center text-zinc-600 dark:text-zinc-400">
-          <Link to="/forgot-password" className="text-primary hover:underline" onClick={handleForgotPassword}>
-            Forgot Password
-          </Link>
-        </p>
+      <div className="flex justify-center flex-grow bg-zinc-100 dark:bg-zinc-900">
+        <div className="bg-white dark:bg-zinc-800 p-8 flex-grow justify-center rounded-lg shadow-lg w-full max-w-md mt-20 h-fit mx-5">
+          <h2 className="text-2xl font-bold text-center text-zinc-800 dark:text-zinc-100 mt-4 mb-6">Sign in</h2>
+          <form onSubmit={handleLogin}>
+            <div className="mb-4">
+              <input
+                type="email"
+                placeholder="Enter your Email"
+                value={email}
+                onChange={(e) => { setEmail(e.target.value); handleEmailChange(); }}
+                required
+                className="w-full px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+            </div>
+            <div className="mb-4 relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Enter your Password"
+                value={password}
+                onChange={(e) => { setPassword(e.target.value); handlePasswordChange(); }}
+                required
+                className="w-full px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              />
+            </div>
+            <div className="mb-4 flex items-center">
+              <input
+                type="checkbox"
+                id="showPasswordCheckbox"
+                checked={showPassword}
+                onChange={() => setShowPassword(!showPassword)}
+                className="mr-2"
+              />
+              <label htmlFor="showPasswordCheckbox" className="text-zinc-800 dark:text-zinc-100">Show Password</label>
+            </div>
+            <div className="mb-4 flex gap-6">
+              <button type="submit" className="w-full bg-blue-800 text-white py-1 rounded-lg hover:bg-blue-700">
+                Sign in
+              </button>
+              <button type="button" className="w-full block bg-blue-600 text-white rounded-lg" onClick={handleGoogleLogin}>
+                Google
+              </button>
+            </div>
+          </form>
+          {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
+          {userEmail && <p className="text-center text-zinc-800 dark:text-zinc-100">Signed in as: {userEmail}</p>}
+          <p className="text-center text-zinc-600 dark:text-zinc-400">
+            Don't have an account? <Link to="/" className="text-primary hover:underline">Sign up</Link>
+          </p>
+          <p className="text-center text-zinc-600 dark:text-zinc-400">
+            <Link to="/forgot-password" className="text-primary hover:underline" onClick={handleForgotPassword}>
+              Forgot Password
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
-    </div>
-  )
+  );
 };
 
 export default Login;

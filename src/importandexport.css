@@ -1,0 +1,33 @@
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+    padding: auto;
+    padding-bottom: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-bottom: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.message-container {
+    text-align: center;
+    margin-top: 100px; /* Adjust as needed */
+}
+
+.centered-message {
+    font-size: 16px; 
+    color: #333;
+
+}

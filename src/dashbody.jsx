@@ -17,6 +17,8 @@ import Dash10 from "./Dash10";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FileUploadButton }  from "./importdata";
 import ChartOfAccounts from "./Chartofaccounts";
+import  Importandexport   from "./importandexport";
+import  Settings  from "./settings";
 
 export function Dashbody() {
     
@@ -41,8 +43,12 @@ export function Dashbody() {
                     return <Zoho5 />;
                 case '/home/importdata':
                     return <FileUploadButton />;
+                case '/home/importandexport':
+                    return <Importandexport />;
                 case '/home/chartofaccounts':
                     return <ChartOfAccounts />;
+                case '/home/settings':
+                    return <Settings />;
                 case '/home/high1':
                     return <Dashbody1/>;
                 case '/home/high2':

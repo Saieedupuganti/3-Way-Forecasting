@@ -55,40 +55,40 @@ const ChartOfAccounts = () => {
     const oldValue = updatedAccounts[index][field];
     const difference = parseFloat(value) - parseFloat(oldValue);
   
-    // Update total for the account
-    updatedAccounts[index][field] = parseFloat(value);
+    // Update total for the account, formatting to two decimal places
+    updatedAccounts[index][field] = parseFloat(value).toFixed(2);
   
     // Distribute the difference evenly across all months
     if (difference !== 0 && months.length > 0) {
       const differencePerMonth = difference / months.length;
       months.forEach(month => {
         updatedAccounts[index][month.toLowerCase()] =
-          parseFloat(updatedAccounts[index][month.toLowerCase()]) + differencePerMonth;
+          (parseFloat(updatedAccounts[index][month.toLowerCase()]) + differencePerMonth).toFixed(2);
       });
     }
   
     setAccounts(updatedAccounts);
     console.log(`Updating field '${field}' to '${value}' for document ID: ${updatedAccounts[index].id}`);
-    updateFirestoreDocument(updatedAccounts[index].id, { [field]: parseFloat(value) });
-  };
+    updateFirestoreDocument(updatedAccounts[index].id, { [field]: parseFloat(value).toFixed(2) });
+  };  
   
 
   const handleMonthEdit = async (index, month, value) => {
     try {
       const updatedAccounts = [...accounts];
-      updatedAccounts[index][month.toLowerCase()] = value;
-      
+      updatedAccounts[index][month.toLowerCase()] = parseFloat(value).toFixed(2);
+  
       // Recalculate total after updating monthly value
       const monthlyValues = months.map(m => updatedAccounts[index][m.toLowerCase()] || 0);
       const total = monthlyValues.reduce((sum, val) => sum + Number(val), 0);
-      updatedAccounts[index]['total'] = total;
+      updatedAccounts[index]['total'] = total.toFixed(2);
   
       setAccounts(updatedAccounts);
   
       // Prepare updated fields for Firestore update
       const updatedFields = {
-        [month.toLowerCase()]: value,
-        total: total
+        [month.toLowerCase()]: parseFloat(value).toFixed(2),
+        total: total.toFixed(2)
       };
   
       await updateFirestoreDocument(updatedAccounts[index].id, updatedFields);
@@ -98,10 +98,12 @@ const ChartOfAccounts = () => {
   };
   
   
+  
 
   const updateFirestoreDocument = async (documentId, updatedFields) => {
     try {
       const accountDocRef = doc(db, 'csvData', documentId);
+      console.log(accounts);
       await updateDoc(accountDocRef, {
         data: accounts.map(account => ({
           'Account Name': account.name,

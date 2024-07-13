@@ -1,0 +1,171 @@
+.totalcontainer {
+    margin: 20px auto;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin: 10px auto;
+    width: 90%;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .icon {
+    color: black;
+    padding: 5px;
+    border-radius: 3px;
+    font-weight: bold;
+  }
+  
+  .more-options-icon {
+    margin-left: 10px;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+  }
+  
+  .organisation-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .organisation-content {
+    flex-grow: 1;
+  }
+  
+  .add-organisation-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px; /* Adjust margin as needed */
+  }
+  
+  .add-organisation-button:hover {
+    background-color: #0056b3;
+  }
+  .add-business-unit-button{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  .add-business-unit-button:hover {
+    background-color: #0056b3;
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .cancel-button, .add-button {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .cancel-button {
+    background-color: #ccc;
+  }
+  
+  .add-button {
+    background-color: #4CAF50;
+    color: white;
+  }
+  /* settings.css */
+
+.Modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.input-group input {
+  margin-right: 10px;
+}
+
+.remove-unit-button {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.add-another-unit-button {
+  background-color: transparent;
+  border: none;
+  color: green;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.cancel-button, .add-button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #ccc;
+}
+
+.add-button {
+  background-color: #4CAF50;
+  color: white;
+}
+.element.style{
+    width: 600px;
+    height: 600px;
+  }

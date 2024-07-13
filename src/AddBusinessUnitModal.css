@@ -1,0 +1,78 @@
+/* AddBusinessUnitModal.css */
+
+.modal-content {
+    padding: 22px; 
+    max-width: 400px; 
+    margin: 20px auto; 
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .input-group input {
+    flex: 1;
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .remove-unit-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 6px 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 14px;
+  }
+  
+  .add-another-unit-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 14px; /* Adjust padding */
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  
+  .modal-footer {
+    margin-top: 12px;
+    text-align: right;
+  }
+  
+  .cancel-button,
+  .add-button {
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    padding: 8px 14px; /* Adjust padding */
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-left: 8px;
+  }
+  
+  .add-button {
+    background-color: #007bff;
+    color: white;
+  }
+  .element.style {
+    width: 100px;
+  }
+  .mainheader {
+    font-size: 24px; /* Increase font size */
+    text-align: center; /* Center align text */
+    margin-bottom: 20px; /* Add spacing */
+  }
+  .element.style{
+    width: 600px;
+    height: 600px;
+  }
+  
