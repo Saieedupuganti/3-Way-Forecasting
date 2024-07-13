@@ -7,6 +7,7 @@ import { auth } from './Firebase';
 import {onAuthStateChanged} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
 import Dash1 from './Dash1'
+import {Fire} from './fire'
 
 export const AuthContext = createContext();
 
@@ -68,6 +69,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/fire" element={<Fire />} />
             <Route path="/Home/*" element={<Home />} />
           </Routes>
       </div>

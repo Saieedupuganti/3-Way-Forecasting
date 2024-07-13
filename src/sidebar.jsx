@@ -53,38 +53,48 @@ export function Sidebar({menustate,setMenustate}) {
   return (
     <Card className=" shadow-lg bg-gray-200 overflow-hidden" style={{minWidth:"0px",maxWidth:"0px", transition:"width ease 0.5s"}} ref={sidebar}>
       <List className="p-0 mx-auto min-w-full block mt-3">
+        <Link to={'/home/table'} onClick={()=>{if(window.innerWidth<window.innerHeight)setMenustate(true)}}>
+            <ListItem selected={page == '/home/table'} className="sideopt block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
+                Table
+            </ListItem>
+        </Link>
+        <Link to={'/home/upload'} onClick={()=>{if(window.innerWidth<window.innerHeight)setMenustate(true)}}>
+            <ListItem selected={page == '/home/upload'} className="sideopt block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
+                Upload
+            </ListItem>
+        </Link>
         <Link to={'/home/high1'} onClick={()=>{if(window.innerWidth<window.innerHeight)setMenustate(true)}}>
-            <ListItem selected={page == '/home/high1' || page == '/home'} style={{background:color1}} className="block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
+            <ListItem selected={page == '/home/high1' || page == '/home'} className="sideopt block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
                 HighCharts 1
             </ListItem>
         </Link>
         <Link to={'/home/high2'} onClick={()=>{if(window.innerWidth<window.innerHeight)setMenustate(true)}}>
-            <ListItem selected={page == '/home/high2'} style={{background:color2}} className="block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
+            <ListItem selected={page == '/home/high2'} className="sideopt block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
                 HighCharts 2
             </ListItem>
         </Link>
         <Link to={'/home/zoho1'} onClick={()=>{if(window.innerWidth<window.innerHeight)setMenustate(true)}}>
-            <ListItem selected={page == '/home/zoho1'} style={{background:color3}} className="block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
+            <ListItem selected={page == '/home/zoho1'} className="sideopt block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
                 Sales
             </ListItem>
         </Link>
         <Link to={'/home/zoho2'} onClick={()=>{if(window.innerWidth<window.innerHeight)setMenustate(true)}}>
-            <ListItem selected={page == '/home/zoho2'} style={{background:color4}} className="block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
+            <ListItem selected={page == '/home/zoho2'} className="sideopt block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
                 Finance Overview
             </ListItem>
         </Link>
         <Link to={'/home/zoho3'} onClick={()=>{if(window.innerWidth<window.innerHeight)setMenustate(true)}}>
-            <ListItem selected={page == '/home/zoho3'} style={{background:color5}} className="block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
+            <ListItem selected={page == '/home/zoho3'} className="sideopt block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
             Financial Statement
             </ListItem>
         </Link>
         <Link to={'/home/zoho4'} onClick={()=>{if(window.innerWidth<window.innerHeight)setMenustate(true)}}>
-            <ListItem selected={page == '/home/zoho4'} style={{background:color6}} className="block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
+            <ListItem selected={page == '/home/zoho4'} className="sideopt block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
             Invoice Overview
             </ListItem>
         </Link>
         <Link to={'/home/zoho5'} onClick={()=>{if(window.innerWidth<window.innerHeight)setMenustate(true)}}>
-            <ListItem selected={page == '/home/zoho5'} style={{background:color7}} className="block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
+            <ListItem selected={page == '/home/zoho5'} className="sideopt block text-center text-black mx-auto max-w-48 my-2" onClick={() => {setSelectedItem(1)}}>
             Vendor Insights
             </ListItem>
         </Link>

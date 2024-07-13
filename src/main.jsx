@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+import { GridExample } from './aggtab.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

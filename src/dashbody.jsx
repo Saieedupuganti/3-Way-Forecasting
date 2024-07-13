@@ -14,19 +14,35 @@ import Dash8 from "./Dash8";
 import Dash9 from "./Dash9";
 import Dash10 from "./Dash10";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-
-
+import Table1 from "./gridcode";
+import Table2 from "./gridcode2";
+import Table3 from "./gridcode3";
+import { Upload } from "./uploader";
 
 export function Dashbody() {
     
     const { page, setPage, val1, pagename,setPageName } = useContext(AuthContext);
-    console.log(page);
+    // console.log(page);
     const [selected, setSelected] = useState(1);
     const setSelectedItem = (value) => setSelected(value);
     const navigate = useNavigate();
-
+    const [dataSource, setDataSource] = useState([
+        {
+            key: '0',
+            name: 'Edward King 0',
+            age: '32',
+            address: 'London, Park Lane no. 0',
+        },
+        {
+            key: '1',
+            name: 'Edward King 1',
+            age: '32',
+            address: 'London, Park Lane no. 1',
+        },
+    ]);
     const renderView = () => {
         console.log(page);
+        console.log(dataSource)
             switch (page) {
                 case '/home/zoho1':
                     return <Zoho1 />;
@@ -42,6 +58,10 @@ export function Dashbody() {
                     return <Dashbody1/>;
                 case '/home/high2':
                     return <Dashbody2/>;
+                case '/home/table':
+                    return <Table3 />;
+                case '/home/upload':
+                    return <Upload/>;
                 case 'contact':
                     return <Contact />;
                 default:
