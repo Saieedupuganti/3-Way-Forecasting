@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { List, ListItem, Card } from "@material-tailwind/react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from './App';
+import {Button} from '@material-tailwind/react'
+
 
 export function Sidebar({ menustate, setMenustate }) {
   const sidebarRef = useRef(null);
@@ -22,12 +24,13 @@ export function Sidebar({ menustate, setMenustate }) {
       setMenustate(true);
     }
   };
+  // setMenustate(true);
 
   const isSelected = (path) => page === path;
 
   return (
-    <Card className="shadow-lg bg-gray-200 overflow-hidden" style={{ minWidth: "0px", maxWidth: "0px", transition: "width ease 0.5s" }} ref={sidebarRef}>
-      <List className="p-0 mx-auto min-w-full block mt-3">
+    <Card className="shadow-lg shadow-gray-600 bg-gray-200 overflow-hidden h-[91vh]" style={{ minWidth: "0px", maxWidth: "0px", transition: "all ease 0.5s" }} ref={sidebarRef}>
+      <List className="p-0 mx-auto min-w-full  block mt-3 relative h-full ">
         <Link to={'/home/importandexport'} onClick={handleLinkClick}>
           <ListItem selected={isSelected('/home/importandexport')} className="block text-center text-black mx-auto max-w-48 my-2" style={{ background: isSelected('/home/importandexport') ? 'white' : 'rgba(75, 85, 99, 0.4)' }}>
             Import/Export
@@ -44,7 +47,9 @@ export function Sidebar({ menustate, setMenustate }) {
           </ListItem>
         </Link>
         <Link to={'/home/high2'} onClick={handleLinkClick}>
-          <ListItem selected={isSelected('/home/high2')} className="block text-center text-black mx-auto max-w-48 my-2" style={{ background: isSelected('/home/high2') ? 'white' : 'rgba(75, 85, 99, 0.4)' }}>
+          <ListItem selected={isSelected('/home/high2')}
+            style={{ background: isSelected('/home/high2') ? 'white' : 'rgba(75, 85, 99, 0.4)' }}
+            className="block text-center text-black mx-auto max-w-48 my-2">
             HighCharts 2
           </ListItem>
         </Link>
@@ -78,7 +83,17 @@ export function Sidebar({ menustate, setMenustate }) {
             Settings
           </ListItem>
         </Link>
+
       </List>
+      <Button
+        variant="gradient"
+        size="sm"
+        className="min-w-24 py-3 my-4 mx-4 bottom-4"
+        // onClick={handleSignOut}
+      >
+          <span>Sign Out</span>
+      </Button>
+      
     </Card>
   );
 }

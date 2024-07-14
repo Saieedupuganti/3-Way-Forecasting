@@ -150,9 +150,9 @@ const ChartOfAccounts = () => {
   };
 
   return (
-    <div className="chart-of-accounts">
+    <div className="chart-of-accounts text-black">
       <h1>Chart of Accounts</h1>
-      <button onClick={downloadCSV}>Download CSV</button>
+      <button onClick={downloadCSV} className='text-white my-2'>Download CSV</button>
       <div className="table-container">
         <table>
           <thead>

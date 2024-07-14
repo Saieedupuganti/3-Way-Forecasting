@@ -20,6 +20,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 
 
 
+
 export default function Home() {
   const [openNav, setOpenNav] = React.useState(false);
   const [openBar, setOpenBar] = React.useState(false);
@@ -114,24 +115,17 @@ export default function Home() {
  
   
   return (
-    <div className="min-h-screen flex flex-col w-[100%] overflow-scroll">
-      <Navbar className="sticky top-0 h-max max-w-full rounded-none shadow-lg px-4 py-2 lg:px-8 lg:py-2 bg-gray-900">
+    <div className="w-[100%] h-[100vh] bg-white">
+      <div style={{position:"sticky",top:"0px"}} className="h-[10vh] z-10 sticky h-max max-w-full rounded-none shadow-lg px-4 py-2 lg:px-8 lg:py-2 bg-gray-900">
         <div className="flex items-center justify-between text-blue-gray-900">
             {menustate?
-            <Bars3CenterLeftIcon class="h-10 w-10 text-white mr-4 inline-block " onClick={()=>{setMenustate(false)}} />:
-            <XMarkIcon class="h-10 w-10 text-white mr-4 inline-block"  onClick={()=>{setMenustate(true)}} />}
+            <XMarkIcon class="h-10 w-10 text-white mr-4 inline-block"  onClick={()=>{setMenustate(false)}} />:
+            <Bars3CenterLeftIcon class="h-10 w-10 text-white mr-4 inline-block " onClick={()=>{setMenustate(true)}} />}
             <img src="/logo3.jpg" alt="C Suite Navigator Image" className="mr-auto w-14 py-0 inline-block" />
             <h2 className='w-full mx-auto text-center text-2xl'>CFO Dashboard</h2>
             <div className="flex items-center gap-4">
                 <div className="flex items-center gap-x-1">
-                <Button
-                    variant="gradient"
-                    size="sm"
-                    className="hidden lg:inline-block min-w-24 py-3"
-                    onClick={handleSignOut}
-                >
-                    <span>Sign Out</span>
-                </Button>
+
                 </div>
             </div>
         </div>
@@ -142,8 +136,8 @@ export default function Home() {
             </Button>
           </div>
         </MobileNav>
-      </Navbar>
-      <div id="mainbody" className="mainbody flex flex-grow flex-row" style={{width:"100vw"}}>
+      </div>
+      <div id="mainbody" className="mainbody flex flex-grow flex-row " style={{width:"100vw"}}>
     {/* console.log(menustate);
     console.log(menustate); */}
         <Sidebar menustate={menustate} setMenustate={setMenustate}/>

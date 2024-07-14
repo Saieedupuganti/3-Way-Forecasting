@@ -19,6 +19,7 @@ import { FileUploadButton }  from "./importdata";
 import ChartOfAccounts from "./Chartofaccounts";
 import  Importandexport   from "./importandexport";
 import  Settings  from "./settings";
+import {BrowserRouter as Router,Routes,Route} from "react-router-dom"
 
 export function Dashbody() {
     
@@ -61,8 +62,24 @@ export function Dashbody() {
       };
 
     return(
-        <div className="flex flex-grow bg-gray-100 max-w-screen overflow-visible" style={{maxWidth:"100vw"}}>
-            {renderView()}
+        <div className="flex flex-grow bg-gray-100 max-w-screen h-[90vh] overflow-scroll" style={{maxWidth:"100vw"}}>
+            {/* {renderView()} */}
+            <Routes>
+                <Route path="/*" element={<Dashbody1 />} />
+                <Route path="/high1" element={<Dashbody1 />} />
+                <Route path="/high2" element={<Dashbody2 />} />
+                <Route path="/zoho1" element={<Zoho1 />} />
+                <Route path="/zoho2" element={<Zoho2 />} />
+                <Route path="/zoho3" element={<Zoho3 />} />
+                <Route path="/zoho4" element={<Zoho4 />} />
+                <Route path="/zoho5" element={<Zoho5 />} />
+                <Route path="/importdata" element={<FileUploadButton />} />
+                <Route path="/importandexport" element={<Importandexport />} />
+                <Route path="/chartofaccounts" element={<ChartOfAccounts />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path="/importandexport" element={<Importandexport />} />
+                <Route path="/chartofaccounts" element={<ChartOfAccounts />} />
+            </Routes>
         </div>
     )
 
