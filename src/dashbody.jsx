@@ -62,7 +62,7 @@ export function Dashbody() {
       };
 
     return(
-        <div className="flex flex-grow bg-gray-100 max-w-screen h-[90vh] overflow-scroll" style={{maxWidth:"100vw"}}>
+        <div className="flex flex-grow bg-gray-100 max-w-screen h-[91vh] overflow-scroll" style={{maxWidth:"100vw"}}>
             {/* {renderView()} */}
             <Routes>
                 <Route path="/*" element={<Dashbody1 />} />
